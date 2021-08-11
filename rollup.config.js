@@ -6,6 +6,7 @@ import livereload from "rollup-plugin-livereload";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
+import polyfills from 'rollup-plugin-polyfill-node';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -76,6 +77,7 @@ export default {
 	  mainFields : ['./browser']
     }),
     commonjs(),
+	polyfills(),
     json(),
 
     typescript({
