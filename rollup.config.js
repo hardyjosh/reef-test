@@ -49,7 +49,6 @@ export default {
       '@polkadot/x-textdecoder': '_xTextdecoder',
     },
   },
-  external : ['@polkadot/x-textdecoder', '@polkadot/x-textencoder'],
   moduleContext: {
     'node_modules/@polkadot/x-global/index.js':'window'
   },
