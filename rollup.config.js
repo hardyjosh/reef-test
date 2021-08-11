@@ -43,12 +43,16 @@ export default {
     format: "iife",
     name: "app",
     file: "public/build/bundle.js",
-	globals: {
-		'_xTextdecoder' : '@polkadot/x-textdecoder'
-	},
+    globals: {
+      '@polkadot/x-global': 'xglobal',
+      '@polkadot/x-textencoder': '_xTextencoder',
+      '@polkadot/x-textdecoder': '_xTextdecoder',
+    },
   },
-  external : ['@polkadot/x-textdecoder'],
-
+  external : ['@polkadot/x-textdecoder', '@polkadot/x-textencoder'],
+  moduleContext: {
+    'node_modules/@polkadot/x-global/index.js':'window'
+  },
   plugins: [
     svelte({
       compilerOptions: {
