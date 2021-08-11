@@ -9,5 +9,5 @@ yarn
 then:
 
 ```bash
-npm run dev
+yarn dev
 ```
