@@ -6,6 +6,7 @@ import livereload from "rollup-plugin-livereload";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
+import polyfills from 'rollup-plugin-polyfill-node';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -49,7 +50,7 @@ export default {
       '@polkadot/x-textdecoder': '_xTextdecoder',
     },
   },
-  external : ['@polkadot/x-textdecoder', '@polkadot/x-textencoder'],
+//   external : ['@polkadot/x-textdecoder', '@polkadot/x-textencoder'],
   moduleContext: {
     'node_modules/@polkadot/x-global/index.js':'window'
   },
@@ -77,6 +78,7 @@ export default {
 	  mainFields : ['./browser']
     }),
     commonjs(),
+	polyfills(),
     json(),
 
     typescript({
