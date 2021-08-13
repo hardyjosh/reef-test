@@ -6,6 +6,7 @@ import livereload from "rollup-plugin-livereload";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
+import polyfills from 'rollup-plugin-polyfill-node';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -43,12 +44,15 @@ export default {
     format: "iife",
     name: "app",
     file: "public/build/bundle.js",
-	globals: {
-		'_xTextdecoder' : '@polkadot/x-textdecoder'
-	},
+    globals: {
+      '@polkadot/x-global': 'xglobal',
+      '@polkadot/x-textencoder': '_xTextencoder',
+      '@polkadot/x-textdecoder': '_xTextdecoder',
+    },
   },
-  external : ['@polkadot/x-textdecoder'],
-
+  moduleContext: {
+    'node_modules/@polkadot/x-global/index.js':'window'
+  },
   plugins: [
     svelte({
       compilerOptions: {
@@ -73,6 +77,7 @@ export default {
 	  mainFields : ['./browser']
     }),
     commonjs(),
+	polyfills(),
     json(),
 
     typescript({
